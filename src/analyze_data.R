@@ -4,12 +4,13 @@ The purpose of this analysis is to test the hypothesis that areas with increased
 have less polling stations.
 '
 
-#The data is taken from the city of Vancouver Website:
-#http://data.vancouver.ca/datacatalogue/index.htm
+library(sf)
+library(raster)
 
+shape <- readOGR(dsn = "../data/local_area_boundary_shp/local_area_boundary.shp", layer = "SHAPEFILE")
 
-voting_data <- read.csv(file="../data/voting_places_2017.csv", header=TRUE, sep=",")
-crime_data <- read.csv(file="../data/crime_csv_all_years.csv", header=TRUE, sep=",")
+shp <- shapefile("data/local_area_boundary_shp/local_area_boundary.shp")
+shape2 <- st_read("data/local_area_boundary_shp/local_area_boundary.shp")
 
-head(voting_data)
-head(crime_data)
+plot(shp, col = "cyan1", border = "black", lwd = 3,
+     main = "AOI Boundary Plot")
