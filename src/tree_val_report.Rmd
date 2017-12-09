@@ -2,11 +2,7 @@
 title: "Land Value and Public Trees Analysis"
 author: "Ted Haley"
 date: "December, 2017"
-output: 
-  github_document : default
-  pdf_document: default
-  html_document:
-    keep_md: yes
+output: github_document
 ---
 ```{r}
 library(ezknitr)
