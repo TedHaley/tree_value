@@ -10,8 +10,6 @@
 
 #import packages
 suppressPackageStartupMessages(library(tidyverse))
-suppressPackageStartupMessages(library(sf))
-suppressPackageStartupMessages(library(raster))
 
 #Read the clean data
 tree_data <- read.csv(file="results/tree_data_final.csv", header=TRUE, sep=",")
@@ -63,12 +61,12 @@ land_val_neigh<- tax_data %>%
   summarise(mean_lv = mean(CURRENT_LAND_VALUE), mean_pr_lv = mean(PREVIOUS_LAND_VALUE), mean_ch = ((mean_lv-mean_pr_lv)/(mean_pr_lv)),count = n()) %>%
   arrange(desc(mean_ch))
 
-(land_val_neigh)
+#This outputs the modified data to the results folder
+write_csv(tree_size_neigh, path = "results/sumr_tree_size_neigh.csv")
+write_csv(tree_size_type, path = "results/sumr_tree_size_type.csv")
+write_csv(tree_type_neigh, path = "results/sumr_tree_type_neigh.csv")
+write_csv(most_common, path = "results/sumr_most_common.csv")
+write_csv(neigh_yr_planted, path = "results/sumr_neigh_yr_planted.csv")
+write_csv(land_val_neigh, path = "results/sumr_land_val_neigh.csv")
 
-# shape <- readOGR(dsn = "../data/local_area_boundary_shp/local_area_boundary.shp", layer = "SHAPEFILE")
-# 
-# shp <- shapefile("data/local_area_boundary_shp/local_area_boundary.shp")
-# shape2 <- st_read("data/local_area_boundary_shp/local_area_boundary.shp")
-# 
-# plot(shp, col = "cyan1", border = "black", lwd = 3,
-#      main = "AOI Boundary Plot")
+
