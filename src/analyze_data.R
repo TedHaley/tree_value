@@ -48,7 +48,7 @@ most_common <- tree_data %>%
 #Year the tree was planted by neighborhood: Trees planted since 2014
 neigh_yr_planted <- tree_data %>%
   select(NEIGHBOURHOOD_NAME, DATE_PLANTED) %>%
-  mutate(year = strftime(DATE_PLANTED, format="%Y")) %>%
+  mutate(year = as.integer(DATE_PLANTED)) %>%
   filter(year > 2014) %>% 
   group_by(NEIGHBOURHOOD_NAME) %>%
   summarise(count=n()) %>% 

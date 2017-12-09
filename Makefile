@@ -8,15 +8,11 @@
 
 ###############################
 #Usage: `make all`
+#
+#After every run, use `make clean`
 ###############################
 
-
 all: doc/tree_val_report.md
-
-
-#file_to_create.png : data_it_depends_on.dat script_it_depends_on.py
-#	python script_it_depends_on.py data_it_depends_on.dat file_to_create.png
-
 
 ###############################
 #Import and Wrangle Data
@@ -125,8 +121,9 @@ doc/tree_val_report.md: src/tree_val_report.Rmd results/tax_val_map.png results/
 ###############################
 #Clean the data
 ###############################
+
 clean:
 	rm -f results/*.csv
 	rm -f results/*.png
-	rm -f doc/count_report.md 
-	rm -f doc/count_report.html
+	rm -f doc/tree_val_report.md 
+	rm -f doc/tree_val_report.html

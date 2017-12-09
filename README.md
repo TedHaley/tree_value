@@ -2,6 +2,8 @@
 
 #### Created by: Teddy Haley
 
+[Link to repository](https://github.ubc.ca/teddyh/tree_value)
+
 ##About
 This project analyzes the correlation between land value in the City of Vancouver and public trees. 
 
@@ -18,10 +20,14 @@ To run the project:
 ##Data
 The datasets used in this analysis are provided by the City of Vancouver Open data set. These datasets can be found at [Vanocuver Open Data](#http://data.vancouver.ca/datacatalogue/index.htm).
 
+The datasets taken from the City of Vancouver website include:
+`property_tax_report.csv`  
+`StreetTrees_CityWide.csv`  
+`local_area_boundary_shp`
 
 
 ##Hypothesis
-The size, age, and number of trees has a direct effect on the value of land in the City of Vancouver.
+To test the correlation in size, age, and number of trees to the value of land in the City of Vancouver.
 
 ##Analysis
 Using the property tax report for land values provided by the City of Vancouver, as well as the dataset for street trees in Vancouver, this analysis will test the correlation between land value and various attributes of street trees. These attributes include the size, age, number, and location of the trees. The data may also be used to generate the average number of trees by neighborhood in contrast with average land value. To help visualize the data, a heat map of Vancouver including the land value and location of trees will be provided.
