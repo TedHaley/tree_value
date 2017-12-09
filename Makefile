@@ -6,15 +6,22 @@
 #
 # usage: make all
 
-# run all analysis
-all: doc/count_report.md
+###############################
+#Usage: `make all`
+###############################
+
+
+all: doc/tree_val_report.md
+
 
 #file_to_create.png : data_it_depends_on.dat script_it_depends_on.py
 #	python script_it_depends_on.py data_it_depends_on.dat file_to_create.png
 
+
 ###############################
 #Import and Wrangle Data
 ###############################
+
 
 #Shape Data
 results/shp_areas_final.csv: data/local_area_boundary_shp/cov_localareas.csv src/import_data.R
@@ -41,30 +48,83 @@ results/sumr_land_val_neigh.csv: results/tax_data_final.csv src/analyze_data.R
 	Rscript src/analyze_data.R results/tax_data_final.csv results/sumr_land_val_neigh.csv
 
 
-#sumr_land_val_neigh
-results/sumr_land_val_neigh.csv: results/tax_data_final.csv src/analyze_data.R
-	Rscript src/analyze_data.R results/tax_data_final.csv results/sumr_land_val_neigh.csv
+#sumr_most_common
+results/sumr_most_common.csv: results/tree_data_final.csv src/analyze_data.R
+	Rscript src/analyze_data.R results/tree_data_final.csv results/sumr_most_common.csv
+
+
+#sumr_neigh_yr_planted
+results/sumr_neigh_yr_planted.csv: results/tree_data_final.csv src/analyze_data.R
+	Rscript src/analyze_data.R results/tree_data_final.csv results/sumr_neigh_yr_planted.csv
+
+
+#sumr_tree_size_neigh
+results/sumr_tree_size_neigh.csv: results/tree_data_final.csv src/analyze_data.R
+	Rscript src/analyze_data.R results/tree_data_final.csv results/sumr_tree_size_neigh.csv
+
+
+#sumr_tree_size_type
+results/sumr_tree_size_type.csv: results/tree_data_final.csv src/analyze_data.R
+	Rscript src/analyze_data.R results/tree_data_final.csv results/sumr_tree_size_type.csv
+
+
+#sumr_tree_type_neigh
+results/sumr_tree_type_neigh.csv: results/tree_data_final.csv src/analyze_data.R
+	Rscript src/analyze_data.R results/tree_data_final.csv results/sumr_tree_type_neigh.csv
 
 
 ###############################
 #Visualize Data
 ###############################
 
-#create plot
-results/figure/isles.png: results/isles.dat src/plotcount.py
-	python src/plotcount.py results/isles.dat results/figure/isles.png
-results/figure/abyss.png: results/abyss.dat src/plotcount.py
-	python src/plotcount.py results/abyss.dat results/figure/abyss.png
-results/figure/last.png: results/last.dat src/plotcount.py
-	python src/plotcount.py results/last.dat results/figure/last.png
-results/figure/sierra.png: results/sierra.dat src/plotcount.py
-	python src/plotcount.py results/sierra.dat results/figure/sierra.png
 
-# make count_report
-doc/count_report.md: src/count_report.Rmd results/figure/isles.png results/figure/abyss.png results/figure/last.png results/figure/sierra.png
-	Rscript -e 'ezknitr::ezknit("src/count_report.Rmd", out_dir = "doc")'
+#tax_val_map.png
+results/tax_val_map.png: results/sumr_land_val_neigh.csv data/local_area_boundary_shp/local_area_boundary.shp src/viz_data.R
+	Rscript src/viz_data.R results/sumr_land_val_neigh.csv data/local_area_boundary_shp/local_area_boundary.shp results/tax_val_map.png
 
-#Clean up intermediate files
+
+#tax_val_ch_map.png
+results/tax_val_ch_map.png: results/sumr_land_val_neigh.csv data/local_area_boundary_shp/local_area_boundary.shp src/viz_data.R
+	Rscript src/viz_data.R results/sumr_land_val_neigh.csv data/local_area_boundary_shp/local_area_boundary.shp results/tax_val_ch_map.png
+
+
+#tree_count_map.png
+results/tree_count_map.png: results/sumr_tree_size_neigh.csv data/local_area_boundary_shp/local_area_boundary.shp src/viz_data.R
+	Rscript src/viz_data.R results/sumr_tree_size_neigh.csv data/local_area_boundary_shp/local_area_boundary.shp results/tree_count_map.png
+
+
+#tree_dia_map.png
+results/tree_dia_map.png: results/sumr_neigh_yr_planted.csv data/local_area_boundary_shp/local_area_boundary.shp src/viz_data.R
+	Rscript src/viz_data.R results/sumr_neigh_yr_planted.csv data/local_area_boundary_shp/local_area_boundary.shp results/tree_dia_map.png
+
+
+#tree_val_ch_plot.png
+results/tree_val_ch_plot.png: results/sumr_land_val_neigh.csv results/sumr_neigh_yr_planted.csv src/viz_data.R
+	Rscript src/viz_data.R results/sumr_land_val_neigh.csv results/sumr_neigh_yr_planted.csv results/tree_val_ch_plot.png
+
+
+#tree_val_plot.png
+results/tree_val_plot.png: results/sumr_land_val_neigh.csv results/sumr_neigh_yr_planted.csv src/viz_data.R
+	Rscript src/viz_data.R results/sumr_land_val_neigh.csv results/sumr_neigh_yr_planted.csv results/tree_val_plot.png
+
+
+#lm_tree.csv
+results/lm_tree.csv: results/sumr_land_val_neigh.csv results/sumr_neigh_yr_planted.csv src/viz_data.R
+	Rscript src/viz_data.R results/sumr_land_val_neigh.csv results/sumr_neigh_yr_planted.csv results/lm_tree.csv
+
+
+###############################
+#Compile Report
+###############################
+
+
+doc/tree_val_report.md: src/tree_val_report.Rmd results/tax_val_map.png results/tax_val_ch_map.png results/tree_count_map.png results/tree_dia_map.png results/tree_val_ch_plot.png results/tree_val_plot.png results/lm_tree.csv
+	Rscript -e 'ezknitr::ezknit("src/tree_val_report.Rmd", out_dir = "doc")'
+
+
+###############################
+#Clean the data
+###############################
 clean:
 	rm -f results/*.csv
 	rm -f results/*.png

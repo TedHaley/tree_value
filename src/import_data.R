@@ -23,7 +23,7 @@ shp_areas <- read.csv(file="data/local_area_boundary_shp/cov_localareas.csv", he
 #Wrangle data to include only the required information for the analysis
 tree_data_clean <- tree_data %>%
   select(TREE_ID, NEIGHBOURHOOD_NAME, DIAMETER, DATE_PLANTED, COMMON_NAME, LATITUDE, LONGITUDE) %>% 
-  mutate(DATE_PLANTED = ymd(DATE_PLANTED, tz = NULL)) 
+  mutate(DATE_PLANTED = ymd(DATE_PLANTED, tz = 'Canada/Pacific')) 
 
 #Replaces 0 coordinate with NA. NAs are ommited later in this script.
 tree_data_clean[tree_data_clean == 0] <- NA
@@ -100,5 +100,4 @@ shp_areas_final <- shp_areas_clean_NC %>%
 write_csv(shp_areas_final, path = "results/shp_areas_final.csv")
 write_csv(tax_data_final, path = "results/tax_data_final.csv")
 write_csv(tree_data_final, path = "results/tree_data_final.csv")
-
 
