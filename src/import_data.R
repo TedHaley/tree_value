@@ -22,11 +22,16 @@ shp_areas <- read.csv(file="data/local_area_boundary_shp/cov_localareas.csv", he
 
 #Wrangle data to include only the required information for the analysis
 tree_data_clean <- tree_data %>%
-  select(TREE_ID, NEIGHBOURHOOD_NAME, DIAMETER, DATE_PLANTED, COMMON_NAME, LATITUDE, LONGITUDE) 
+  select(TREE_ID, NEIGHBOURHOOD_NAME, DIAMETER, DATE_PLANTED, COMMON_NAME, LATITUDE, LONGITUDE) %>% 
+  mutate(DATE_PLANTED = ymd(DATE_PLANTED, tz = NULL)) 
+
+#Replaces 0 coordinate with NA. NAs are ommited later in this script.
+tree_data_clean[tree_data_clean == 0] <- NA
  
 tax_data_clean <- tax_data %>%  
   mutate(CHANGE_LV = round(((CURRENT_LAND_VALUE - PREVIOUS_LAND_VALUE)/(CURRENT_LAND_VALUE)), digits = 3)) %>% 
-  select(NEIGHBOURHOOD_CODE, CURRENT_LAND_VALUE, CHANGE_LV)
+  select(NEIGHBOURHOOD_CODE, CURRENT_LAND_VALUE, PREVIOUS_LAND_VALUE, CHANGE_LV) 
+tax_data_clean[tax_data_clean == 0] <- NA
 
 shp_areas_clean <- shp_areas %>% 
   mutate(NAME = as.factor(toupper(NAME))) %>% 
@@ -80,18 +85,20 @@ shp_areas_clean_NC <- left_join(shp_areas_clean, NEIGHBOURHOOD_CODE_Converter)
 
 #Organize the data. Not essential, but makes it look nice
 tree_data_final <- tree_data_clean  %>%
-  arrange(NEIGHBOURHOOD_NAME)
+  arrange(NEIGHBOURHOOD_NAME) 
+tree_data_final <- na.omit(tree_data_final)
 
 tax_data_final <- tax_data_clean_NC %>%  
-  arrange(NEIGHBOURHOOD_CODE)
+  arrange(NEIGHBOURHOOD_CODE) %>% 
+  filter(CHANGE_LV > -5)
+tax_data_final <- na.omit(tax_data_final)
 
 shp_areas_final <- shp_areas_clean_NC %>% 
   arrange(NEIGHBOURHOOD_CODE)
 
-#This outputs the cleaned and wrangled data into the results folder.
-write_csv(na.omit(shp_areas_final), path = "results/shp_areas_final.csv")
-write_csv(na.omit(tax_data_final), path = "results/tax_data_final.csv")
-write_csv(na.omit(tree_data_final), path = "results/tree_data_final.csv")
-
+#This outputs the cleaned and wrangled data into the results folder. Omits any rows where the data is missing.
+write_csv(shp_areas_final, path = "results/shp_areas_final.csv")
+write_csv(tax_data_final, path = "results/tax_data_final.csv")
+write_csv(tree_data_final, path = "results/tree_data_final.csv")
 
 
