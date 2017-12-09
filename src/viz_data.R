@@ -38,47 +38,76 @@ names(shp_areas) <- c("id", "NEIGHBOURHOOD_NAME", "NEIGHBOURHOOD_CODE")
 #This joins the shape file data and the neighbourhood code identifier: This is the KEY between datasets
 key <- left_join(van_shp_fort, shp_areas)
 
+#Set map centre location
+location <- unlist(geocode('357 W King Edward Ave, Vancouver, BC V5Y 2J1'))+c(-0.01,-0.005)
+gmap <- get_map(location=location, zoom = 12, col="bw")
+
+# land_val_neigh on the map
+land_val_neigh_map <- left_join(key, sumr_land_val_neigh)
+
+#plot mean land value on map by neighbourhood
+tax_val_map <- ggmap(gmap) + 
+  geom_polygon(aes(fill = mean_lv, x = long, y = lat, group = group), 
+               data = land_val_neigh_map,
+               alpha = 0.8, 
+               color = "black",
+               size = 0.2) +
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("Mean Land Value by neighbourhood") +
+  scale_fill_continuous(name = "Land Value ($)") 
+
+# Save tax_val_map.png
+ggsave(filename = 'tax_val_map.png', plot = tax_val_map, device = 'png', path = 'results/')
+
+#plot mean land value change on map by neighbourhood
+tax_val_ch_map <- ggmap(gmap) + 
+  geom_polygon(aes(fill = mean_ch, x = long, y = lat, group = group), 
+               data = land_val_neigh_map,
+               alpha = 0.8, 
+               color = "black",
+               size = 0.2) +
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("Mean Land Value Change \nby neighbourhood (2015-2016)") +
+  scale_fill_continuous(name = "Land Value \nChange (%)") 
+
+# Save tax_val_map.png
+ggsave(filename = 'tax_val_ch_map.png', plot = tax_val_ch_map, device = 'png', path = 'results/')
+
 # tree_size_neigh on the map
 tree_size_neigh_map <- left_join(key, sumr_tree_size_neigh)
 
-g <- ggplot(tree_size_neigh_map, aes(long, lat, group = group)) + 
-  geom_polygon(aes(fill = mean_dia))
+#plot tree diamater on map by neighbourhood
+tree_dia_map <- ggmap(gmap) + 
+  geom_polygon(aes(fill = mean_dia, x = long, y = lat, group = group), 
+               data = tree_size_neigh_map,
+               alpha = 0.8, 
+               color = "black",
+               size = 0.2) +
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("Mean tree diameter \nby neighbourhood") +
+  scale_fill_continuous(name = "Tree Diameter")
 
-g
-# 
-# van_hoods  = merge(van_shp_fort, van_shp@data, by.x = 'id', by.y = 'ZIP_CODE')
-#sf = merge(SFNeighbourhoods, values, by.x='id')
-#sf %>% group_by(id) %>% do(head(., 1)) %>% head(10)
+# Save tree_dia_map.png
+ggsave(filename = 'tree_dia_map.png', plot = tree_dia_map, device = 'png', path = 'results/')
 
-# 
-# names(van_shp)
-# head(van_shp)
+# tree_size_neigh on the map
+neigh_yr_planted_map <- left_join(key, sumr_neigh_yr_planted)
 
-# location <- unlist(geocode('357 W King Edward Ave, Vancouver, BC V5Y 2J1'))+c(-0.01,-0.005)
-# 
-# gmap <- get_map(location=location, zoom = 12, maptype = "terrain", source = "google", col="bw")
-# 
-# van_shp_map <- ggmap(gmap) +
-#   geom_polygon(data=van_shp, aes(x=long, y=lat, group=group), color="red", alpha=0) +
-#   coord_map() +
-#   theme_bw()
-# 
-# van_shp_map
+#plot tree diamater on map by neighbourhood
+tree_count_map <- ggmap(gmap) + 
+  geom_polygon(aes(fill = count, x = long, y = lat, group = group), 
+               data = neigh_yr_planted_map,
+               alpha = 0.8, 
+               color = "black",
+               size = 0.2) +
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("Number of trees planted by \nneighbourhood since 2010") +
+  scale_fill_continuous(name = "Number of Trees")
 
+# Save tree_dia_map.png
+ggsave(filename = 'tree_count_map.png', plot = tree_count_map, device = 'png', path = 'results/')
 
-
-#head(tree_data)
-
-# map <- get_map(location = 'Vancouver', zoom = 12)
-# 
-# mapPoints <- ggmap(map) +   
-#   geom_point(aes(x = LONGITUDE, y = LATITUDE, size = DIAMETER), data = tree_data, alpha = 0.1)
-# 
-# mapPoints
-
-
-
-
-# shp <- shapefile("data/local_area_boundary_shp/local_area_boundary.shp")
-# plot(shp, col = "cyan1", border = "black", lwd = 3,
-#      main = "AOI Boundary Plot")

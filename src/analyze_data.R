@@ -45,13 +45,14 @@ most_common <- tree_data %>%
   summarise(count = n()) %>% 
   arrange(desc(count))
 
-#Year the tree was planted by neighborhood
+#Year the tree was planted by neighborhood: Trees planted since 2010
 neigh_yr_planted <- tree_data %>%
   select(NEIGHBOURHOOD_NAME, DATE_PLANTED) %>%
   mutate(year = strftime(DATE_PLANTED, format="%Y")) %>%
-  group_by(NEIGHBOURHOOD_NAME,year) %>%
+  filter(year > 2010) %>% 
+  group_by(NEIGHBOURHOOD_NAME) %>%
   summarise(count=n()) %>% 
-  arrange(NEIGHBOURHOOD_NAME, desc(year))
+  arrange(NEIGHBOURHOOD_NAME)
 
 #Tax analysis
 #Mean land value by neighborhood by year
@@ -68,5 +69,4 @@ write_csv(tree_type_neigh, path = "results/sumr_tree_type_neigh.csv")
 write_csv(most_common, path = "results/sumr_most_common.csv")
 write_csv(neigh_yr_planted, path = "results/sumr_neigh_yr_planted.csv")
 write_csv(land_val_neigh, path = "results/sumr_land_val_neigh.csv")
-
 
