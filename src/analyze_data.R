@@ -45,11 +45,11 @@ most_common <- tree_data %>%
   summarise(count = n()) %>% 
   arrange(desc(count))
 
-#Year the tree was planted by neighborhood: Trees planted since 2010
+#Year the tree was planted by neighborhood: Trees planted since 2014
 neigh_yr_planted <- tree_data %>%
   select(NEIGHBOURHOOD_NAME, DATE_PLANTED) %>%
   mutate(year = strftime(DATE_PLANTED, format="%Y")) %>%
-  filter(year > 2010) %>% 
+  filter(year > 2014) %>% 
   group_by(NEIGHBOURHOOD_NAME) %>%
   summarise(count=n()) %>% 
   arrange(NEIGHBOURHOOD_NAME)

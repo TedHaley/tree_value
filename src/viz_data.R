@@ -11,6 +11,7 @@ suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(ggmap))
 suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(rgdal))
+suppressPackageStartupMessages(library(broom))
 
 # Import clean data
 tree_data <- read.csv(file="results/tree_data_final.csv", header=TRUE, sep=",")
@@ -105,9 +106,37 @@ tree_count_map <- ggmap(gmap) +
                size = 0.2) +
   xlab("Longitude") + 
   ylab("Latitude") +
-  ggtitle("Number of trees planted by \nneighbourhood since 2010") +
+  ggtitle("Number of trees planted by \nneighbourhood since 2015") +
   scale_fill_continuous(name = "Number of Trees")
 
 # Save tree_dia_map.png
 ggsave(filename = 'tree_count_map.png', plot = tree_count_map, device = 'png', path = 'results/')
 
+# Join number of trees and land value change dataset
+tree_val_df <- left_join(sumr_land_val_neigh, sumr_neigh_yr_planted)
+
+#plot mean land value against trees planted
+tree_val_plot <- ggplot(data = tree_val_df, aes(y = mean_lv, x = count)) +
+  geom_point(alpha = 0.5, aes(color = NEIGHBOURHOOD_NAME)) +
+  geom_smooth(method = "lm") +
+  ylab("Mean land value ($)") + 
+  xlab("Trees Planted since 2015") + 
+  scale_y_continuous(name = "Mean land value ($)",labels=scales::dollar_format()) +
+  guides(color=FALSE)
+
+# Save tree_val_plot.png
+ggsave(filename = 'tree_val_plot.png', plot = tree_val_plot, device = 'png', path = 'results/')
+
+tree_val_ch_plot <- ggplot(data = tree_val_df, aes(y = mean_ch, x = count)) +
+  geom_point(alpha = 0.5, aes(color = NEIGHBOURHOOD_NAME)) +
+  geom_smooth(method = "lm") +
+  ylab("Mean land value change (2015-2016)") + 
+  xlab("Trees Planted since 2010") + 
+  guides(color=FALSE)
+
+# Save tree_val_ch_plot.png
+ggsave(filename = 'tree_val_ch_plot.png', plot = tree_val_ch_plot, device = 'png', path = 'results/')
+
+#Linear model to check correlation between trees planted and change in land value
+lm_tree <- as.data.frame(tidy(summary(lm(mean_ch~count,data=tree_val_df)))) 
+write_csv(lm_tree, path = "results/lm_tree.csv")
