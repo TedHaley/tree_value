@@ -30,7 +30,7 @@ The datasets taken from the City of Vancouver website include:
 To test the correlation in size, age, and number of trees to the value of land in the City of Vancouver.
 
 ##Analysis
-Using the property tax report for land values provided by the City of Vancouver, as well as the dataset for street trees in Vancouver, this analysis will test the correlation between land value and various attributes of street trees. These attributes include the size, age, number, and location of the trees. The data may also be used to generate the average number of trees by neighborhood in contrast with average land value. To help visualize the data, a heat map of Vancouver including the land value and location of trees will be provided.
+Using the property tax report for land values provided by the City of Vancouver, as well as the dataset for street trees in Vancouver, this analysis will test the correlation between land value and various attributes of street trees. These attributes include the size, age, number, and location of the trees. 
 
 ##Sub-Modules
 There are 4 modules in the root directory. They include bin, data, doc, results, and src.

@@ -131,7 +131,7 @@ tree_val_ch_plot <- ggplot(data = tree_val_df, aes(y = mean_ch, x = count)) +
   geom_point(alpha = 0.5, aes(color = NEIGHBOURHOOD_NAME)) +
   geom_smooth(method = "lm") +
   ylab("Mean land value change (2015-2016)") + 
-  xlab("Trees Planted since 2010") + 
+  xlab("Trees Planted since 2015") + 
   guides(color=FALSE)
 
 # Save tree_val_ch_plot.png
@@ -140,3 +140,4 @@ ggsave(filename = 'tree_val_ch_plot.png', plot = tree_val_ch_plot, device = 'png
 #Linear model to check correlation between trees planted and change in land value
 lm_tree <- as.data.frame(tidy(summary(lm(mean_ch~count,data=tree_val_df)))) 
 write_csv(lm_tree, path = "results/lm_tree.csv")
+(lm_tree)
