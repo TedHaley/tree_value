@@ -12,6 +12,12 @@ suppressPackageStartupMessages(library(ggmap))
 suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(rgdal))
 suppressPackageStartupMessages(library(broom))
+suppressPackageStartupMessages(library(maptools))
+suppressPackageStartupMessages(library(gpclib))
+require(c("gpclib", "maptools"))
+if (!require(gpclib)) install.packages("gpclib", type="source")
+gpclibPermit()
+
 
 # Import clean data
 tree_data <- read.csv(file="results/tree_data_final.csv", header=TRUE, sep=",")
@@ -140,4 +146,3 @@ ggsave(filename = 'tree_val_ch_plot.png', plot = tree_val_ch_plot, device = 'png
 #Linear model to check correlation between trees planted and change in land value
 lm_tree <- as.data.frame(tidy(summary(lm(mean_ch~count,data=tree_val_df)))) 
 write_csv(lm_tree, path = "results/lm_tree.csv")
-(lm_tree)

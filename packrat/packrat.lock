@@ -175,6 +175,11 @@ Source: CRAN
 Version: 1.2.0
 Hash: 381e42baedecc633c0e547a0c7ca9de7
 
+Package: gpclib
+Source: CRAN
+Version: 1.5-5
+Hash: 194b84b1e4f183ef2f622804d01124da
+
 Package: gtable
 Source: CRAN
 Version: 0.2.0
@@ -260,6 +265,12 @@ Package: maps
 Source: CRAN
 Version: 3.2.0
 Hash: 086a0f4e41bf42749d8737e9407a4853
+
+Package: maptools
+Source: CRAN
+Version: 0.9-2
+Hash: 2dfbad6ef57f83a91e4e9d4ccc0807cd
+Requires: foreign, lattice, sp
 
 Package: markdown
 Source: CRAN
