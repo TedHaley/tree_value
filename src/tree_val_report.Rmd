@@ -13,6 +13,10 @@ library(readr)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+#Land Value and Public Trees Analysis
+### Written by: Ted Haley
+#### December, 2017
+
 ## Introduction
 There are a few things that come to mind when anyone thinks about Vancouver. They might think about nature, mountains, the ocean, and of course, the insane cost of housing. High housing prices and in turn, land value, have become apart of Vancouver's identity; it is for this reason that I am interested in analyzing external effects on land value. One of the possibly more overlooked factors is the correlation of land value and public trees. In this analysis, I will see if there is any significance between land value and trees owned, planted, and maintained by the City of Vancouver.
 
