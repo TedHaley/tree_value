@@ -27,39 +27,24 @@
 # Using tidyverse Rocker image as a base
 FROM rocker/tidyverse
 
-## install R spatial packages && cleanup
-RUN xvfb-run -a install.r \
-      geoR \
-      ggmap \
-      ggvis \
-      gstat \
-      mapdata \
-      maps \
-      maptools \
-      plotKML \
-      RandomFields \
-      rgdal \
-      rgeos \
-      sf \
-      shapefiles \
-      sp \
-      spatstat \
-      raster \
-      rasterVis \
-      rts \
-  && installGithub.r s-u/fastshp \
-  && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+# then install the ezknitr packages
+RUN Rscript -e "install.packages('ezknitr', repos = 'http://cran.us.r-project.org')"
 
-#Install required packages
-RUN apt-get update -qq \
-    && apt-get -y --no-install-recommends install \
-    liblzma-dev \
-    libbz2-dev \
-    clang  \
-    ccache \
-    default-jdk \
-    default-jre \
-    && R CMD javareconf \
-    && install2.r --error \
-        ezknitr lubridate dplyr readr ggplot2 broom gpclib
+RUN R -e "install.packages('lubridate')"
+
+RUN R -e "install.packages('dplyr')"
+
+RUN R -e "install.packages('readr')"
+
+RUN R -e "install.packages('ggmap')"
+
+RUN R -e "install.packages('ggplot2')"
+
+RUN R -e "install.packages('rgdal')"
+
+RUN R -e "install.packages('broom')"
+
+RUN R -e "install.packages('maptools')"
+
+RUN R -e "install.packages('gpclib')"
   
