@@ -11,10 +11,16 @@
 #The data is taken from the city of Vancouver Website:
 #http://data.vancouver.ca/datacatalogue/index.htm
 
-suppressPackageStartupMessages(library(tidyverse))
-suppressPackageStartupMessages(library(lubridate))
-suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(readr))
+library(tidyverse)
+library(ggmap)
+library(ggplot2)
+library(rgdal)
+library(broom)
+library(maptools)
+library(gpclib)
+library(lubridate)
+library(dplyr)
+library(readr)
 
 tree_data <- read.csv(file="data/StreetTrees_CityWide.csv", header=TRUE, sep=",")
 tax_data <- read.csv(file="data/property_tax_report.csv", header=TRUE, sep=",")

@@ -7,13 +7,17 @@
 
 # Usage: Rscript src/viz_data.R
 
-suppressPackageStartupMessages(library(tidyverse))
-suppressPackageStartupMessages(library(ggmap))
-suppressPackageStartupMessages(library(ggplot2))
-suppressPackageStartupMessages(library(rgdal))
-suppressPackageStartupMessages(library(broom))
-suppressPackageStartupMessages(library(maptools))
-suppressPackageStartupMessages(library(gpclib))
+library(tidyverse)
+library(ggmap)
+library(ggplot2)
+library(rgdal)
+library(broom)
+library(maptools)
+library(gpclib)
+library(lubridate)
+library(dplyr)
+library(readr)
+
 require(c("gpclib", "maptools"))
 if (!require(gpclib)) install.packages("gpclib", type="source")
 gpclibPermit()
