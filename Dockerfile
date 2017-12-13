@@ -27,6 +27,29 @@
 # Using tidyverse Rocker image as a base
 FROM rocker/tidyverse
 
+## install R spatial packages && cleanup
+RUN xvfb-run -a install.r \
+      geoR \
+      ggmap \
+      ggvis \
+      gstat \
+      mapdata \
+      maps \
+      maptools \
+      plotKML \
+      RandomFields \
+      rgdal \
+      rgeos \
+      sf \
+      shapefiles \
+      sp \
+      spatstat \
+      raster \
+      rasterVis \
+      rts \
+  && installGithub.r s-u/fastshp \
+  && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+
 #Install required packages
 RUN apt-get update -qq \
     && apt-get -y --no-install-recommends install \
@@ -38,5 +61,5 @@ RUN apt-get update -qq \
     default-jre \
     && R CMD javareconf \
     && install2.r --error \
-        ezknitr lubridate dplyr readr ggmap ggplot2 rgdal broom maptools gpclib
+        ezknitr lubridate dplyr readr ggplot2 broom gpclib
   
