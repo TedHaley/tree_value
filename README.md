@@ -2,7 +2,9 @@
 
 #### Created by: Teddy Haley
 
-[Link to repository](https://github.ubc.ca/teddyh/tree_value)
+[Link to Personal repository](https://github.com/TedHaley)  
+[Link to Milestone 3](https://github.com/TedHaley/tree_value/releases)  
+[Link to Milestone 1 and 2](https://github.ubc.ca/teddyh/tree_value/releases)
 
 ##About
 This project analyzes the correlation between land value in the City of Vancouver and public trees. 
@@ -10,17 +12,32 @@ This project analyzes the correlation between land value in the City of Vancouve
 ##Usage
 To run the project:
 
-1. In the command line, navigate to the root directory of the `tree_value` repository:  
-`cd ~/tree_value/`
-2. In the command line in the root directory, run the complete project:  
-`make all`   
-3. After running the project, remove all generated files using:  
+1. Open command line
+
+2. `git clone https://github.com/TedHaley/tree_value.git` :to the location of your choice 
+
+3. `docker pull teddyhaley/tree_value` :Pulls the docker image
+
+4. Example of running docker image:
+	`docker run -it --rm -v LocalDirectoryClonedRepo/:/home/tree_value teddyhaley/tree_value /bin/bash`
+
+5. Change directory to make file:  
+`cd home/tree_value/`
+
+6. Prior to running, clean all existing files:  
 `make clean`
+   
+7. Run the project:  
+`make all`
+
+##File Structure
+
+![](Makefile.png) 
 
 ##Data
 The datasets used in this analysis are provided by the City of Vancouver Open data set. These datasets can be found at [Vanocuver Open Data](#http://data.vancouver.ca/datacatalogue/index.htm).
 
-The datasets taken from the City of Vancouver website include:
+The datasets taken from the City of Vancouver website include:  
 `property_tax_report.csv`  
 `StreetTrees_CityWide.csv`  
 `local_area_boundary_shp`
