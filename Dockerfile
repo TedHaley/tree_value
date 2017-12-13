@@ -24,23 +24,27 @@
 #`make all`
 
 
-
 # Using tidyverse Rocker image as a base
 FROM rocker/tidyverse
 
 # then install the ezknitr packages
 RUN Rscript -e "install.packages('ezknitr', repos = 'http://cran.us.r-project.org')"
 
-# Required packages
-RUN apt-get update -qq \
-    && apt-get -y --no-install-recommends install \
-    liblzma-dev \
-    libbz2-dev \
-    clang  \
-    ccache \
-    default-jdk \
-    default-jre \
-    && R CMD javareconf \
-    && install2.r --error \
-    lubridate dplyr readr ggmap ggplot2 rgdal broom maptools gpclib \
+RUN R -e "install.packages('lubridate')"
+
+RUN R -e "install.packages('dplyr')"
+
+RUN R -e "install.packages('readr')"
+
+RUN R -e "install.packages('ggmap')"
+
+RUN R -e "install.packages('ggplot2')"
+
+RUN R -e "install.packages('rgdal')"
+
+RUN R -e "install.packages('broom')"
+
+RUN R -e "install.packages('maptools')"
+
+RUN R -e "install.packages('gpclib')"
   
