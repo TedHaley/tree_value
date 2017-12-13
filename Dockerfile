@@ -9,7 +9,7 @@
 #
 #2. `git clone https://github.com/TedHaley/tree_value.git` :to the location of your choice 
 #
-#3. `docker run --rm -v LocalDirectoryClonedRepo/tree_value:/home/tree_value teddyhaley/#tree_value make -C '/home/analysis' clean`
+#3. `docker run --rm -v LocalDirectoryClonedRepo/tree_value:/home/tree_value teddyhaley/tree_value make -C '/home/analysis' clean`
 #
 #4. `make all`
 
