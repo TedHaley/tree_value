@@ -12,23 +12,13 @@ This project analyzes the correlation between land value in the City of Vancouve
 ##Usage
 To run the project:
 
+##Usage
+To run the project:
+
 1. Open command line
-
 2. `git clone https://github.com/TedHaley/tree_value.git` :to the location of your choice 
-
-3. `docker pull teddyhaley/tree_value` :Pulls the docker image
-
-4. Example of running docker image:
-	`docker run -it --rm -v LocalDirectoryClonedRepo/:/home/tree_value teddyhaley/tree_value /bin/bash`
-
-5. Change directory to make file:  
-`cd home/tree_value/`
-
-6. Prior to running, clean all existing files:  
-`make clean`
-   
-7. Run the project:  
-`make all`
+3. `docker run --rm -v LocalDirectoryClonedRepo/tree_value:/home/tree_value teddyhaley/#tree_value make -C '/home/analysis' clean`
+4. `make all`
 
 ##File Structure
 

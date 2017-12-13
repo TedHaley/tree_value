@@ -9,42 +9,31 @@
 #
 #2. `git clone https://github.com/TedHaley/tree_value.git` :to the location of your choice 
 #
-#3. `docker pull teddyhaley/tree_value` :Pulls the docker image
+#3. `docker run --rm -v LocalDirectoryClonedRepo/tree_value:/home/tree_value teddyhaley/#tree_value make -C '/home/analysis' clean`
 #
-#4. Example of running docker image:
-#	`docker run -it --rm -v LocalDirectoryClonedRepo/:/home/tree_value teddyhaley/tree_value /#bin/bash`
-#
-#5. Change directory to make file:  
-#`cd home/tree_value/`
-#
-#6. Prior to running, clean all existing files:  
-#`make clean`
-#   
-#7. Run the project:  
-#`make all`
-
+#4. `make all`
 
 # Using tidyverse Rocker image as a base
 FROM rocker/tidyverse
 
-# then install the ezknitr packages
-RUN Rscript -e "install.packages('ezknitr', repos = 'http://cran.us.r-project.org')"
+# then install required packages
 
-RUN R -e "install.packages('lubridate')"
+RUN Rscript -e "install.packages('ezknitr', repos = 'https://mran.revolutionanalytics.com/snapshot/2017-12-11')"
 
-RUN R -e "install.packages('dplyr')"
+RUN Rscript -e "install.packages('lubridate', repos = 'https://mran.revolutionanalytics.com/snapshot/2017-12-11')"
 
-RUN R -e "install.packages('readr')"
+RUN Rscript -e "install.packages('readr', repos = 'https://mran.revolutionanalytics.com/snapshot/2017-12-11')"
 
-RUN R -e "install.packages('ggmap')"
+RUN Rscript -e "install.packages('packrat', repos = 'https://mran.revolutionanalytics.com/snapshot/2017-12-11')"
 
-RUN R -e "install.packages('ggplot2')"
+RUN Rscript -e "install.packages('ggmap', repos = 'https://mran.revolutionanalytics.com/snapshot/2017-12-11')"
 
-RUN R -e "install.packages('rgdal')"
+RUN Rscript -e "install.packages('ggplot2', repos = 'https://mran.revolutionanalytics.com/snapshot/2017-12-11')"
 
-RUN R -e "install.packages('broom')"
+RUN Rscript -e "install.packages('rgdal', repos = 'https://mran.revolutionanalytics.com/snapshot/2017-12-11')"
 
-RUN R -e "install.packages('maptools')"
+RUN Rscript -e "install.packages('broom', repos = 'https://mran.revolutionanalytics.com/snapshot/2017-12-11')"
 
-RUN R -e "install.packages('gpclib')"
-  
+RUN Rscript -e "install.packages('maptools', repos = 'https://mran.revolutionanalytics.com/snapshot/2017-12-11')"
+
+RUN Rscript -e "install.packages('gpclib', repos = 'https://mran.revolutionanalytics.com/snapshot/2017-12-11')"
