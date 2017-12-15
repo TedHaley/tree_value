@@ -164,26 +164,18 @@ Hash: 006396aaed8f45b60f39b9a31537859d
 Requires: sp
 
 Package: ggmap
-Source: github
-Version: 2.7
-Hash: 43c1fc0be350916a0e8099948c785368
-Requires: RgoogleMaps, bitops, digest, dplyr, geosphere, ggplot2, jpeg,
-    mapproj, plyr, png, proto, reshape2, rjson, scales
-GithubRepo: ggmap
-GithubUsername: dkahle
-GithubRef: master
-GithubSha1: 924b0752839d645112b5c86bc0e31c06984914c2
+Source: CRAN
+Version: 2.6.1
+Hash: 3e5545418aab1ad8e47c218236dd4f0b
+Requires: RgoogleMaps, digest, geosphere, ggplot2, jpeg, mapproj, plyr,
+    png, proto, reshape2, rjson, scales
 
 Package: ggplot2
-Source: github
-Version: 2.2.1.9000
-Hash: 5772fdc03535bb2abd585be67574ad11
+Source: CRAN
+Version: 2.2.1
+Hash: 46e5cb78836848aa44655e577433f54b
 Requires: MASS, digest, gtable, lazyeval, plyr, reshape2, scales,
-    tibble, viridisLite, withr
-GithubRepo: ggplot2
-GithubUsername: hadley
-GithubRef: master
-GithubSha1: bfff1d88c5cc5abf5b4455bd99d48238db2530f3
+    tibble
 
 Package: git2r
 Source: CRAN
