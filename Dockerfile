@@ -13,14 +13,6 @@
 
 FROM rocker/rstudio
 
-RUN apt-get update && \
-  apt-get install -y \
-  libgdal1-dev \
-  libproj-dev \
-  libv8-dev \
-  ssh && \
-  apt-get clean all
-
 RUN Rscript -e "install.packages('devtools')"
 
 RUN Rscript -e "library(devtools);install_github('dkahle/ggmap')"
