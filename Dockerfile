@@ -38,8 +38,12 @@ RUN R -e "install.packages('packrat')"
 
 RUN R -e "install.packages('MASS')"
 
+RUN R -e "install.packages('scales')"
+
 RUN R -e "install.packages('stringr')"
 
 RUN R -e "install.packages('hexbin')"
+
+RUN R -e "install.packages('reshape2')"
 
 RUN R -e "install.packages('ggmap')"

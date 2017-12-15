@@ -18,6 +18,9 @@ library(lubridate)
 library(dplyr)
 library(readr)
 
+require(ggmap)
+require(gpclib)
+
 require(c("gpclib", "maptools"))
 if (!require(gpclib)) install.packages("gpclib", type="source")
 gpclibPermit()
