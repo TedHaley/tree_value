@@ -11,40 +11,16 @@
 # `make clean`
 # `make all`
 
-FROM rocker/rstudio
+FROM rocker/tidyverse
 
-RUN Rscript -e "install.packages('devtools')"
-
-RUN Rscript -e "library(devtools);install_github('dkahle/ggmap')"
-
-RUN Rscript -e "install.packages('tidyverse')"
-
-RUN Rscript -e "install.packages('ezknitr')"
-
-RUN Rscript -e "install.packages('lubridate')"
-
-RUN Rscript -e "install.packages('dplyr')"
-
-RUN Rscript -e "install.packages('readr')"
-
-RUN Rscript -e "install.packages('ggplot2')"
-
-RUN Rscript -e "install.packages('rgdal')"
-
-RUN Rscript -e "install.packages('broom')"
-
-RUN Rscript -e "install.packages('maptools')"
-
-RUN Rscript -e "install.packages('gpclib')"
-
-RUN Rscript -e "install.packages('packrat')"
-
-RUN Rscript -e "install.packages('MASS')"
-
-RUN Rscript -e "install.packages('scales')"
-
-RUN Rscript -e "install.packages('stringr')"
-
-RUN Rscript -e "install.packages('hexbin')"
-
-RUN Rscript -e "install.packages('reshape2')"
+RUN apt-get update -qq \
+    && apt-get -y --no-install-recommends install \
+    liblzma-dev \
+    libbz2-dev \
+    clang  \
+    ccache \
+    default-jdk \
+    default-jre \
+    && R CMD javareconf \
+    && install2.r --error \
+        devtools ggmap ezknitr lubridate dplyr readr ggplot2 rgdal broom maptools gpclib packrat MASS scales stringr hexbin reshape2
