@@ -15,13 +15,13 @@ To run the project:
 ##Usage
 To run the project:
 
-1. Open command line
-
-2. `git clone https://github.com/TedHaley/tree_value.git` :to the location of your choice
- 
-3. Replace `/Users/Teddy/MDS/tree_value` with the location of where you saved the repo: `docker run --rm -v /Users/Teddy/MDS/tree_value:/home/tree_value teddyhaley/tree_value make -C '/home/tree_value' clean`
-
-4. Replace `/Users/Teddy/MDS/tree_value` with the location of where you saved the repo: `docker run --rm -v /Users/Teddy/MDS/tree_value:/home/tree_value teddyhaley/tree_value make -C 'home/tree_value' all`
+1. `git clone https://github.com/TedHaley/tree_value.git`
+2. `cd Path-To-Local-Repo/tree_value`
+3. `docker pull teddyhaley/tree_value`
+4. `docker run --rm -it -v /Path-To-Local-Repo/tree_value:/home/tree_value teddyhaley/tree_value /bin/bash`
+5. `cd home/tree_value/`
+6. `make clean`
+7. `make all`
 
 ##File Structure
 

@@ -9,6 +9,7 @@
 # Usage: Rscript src/analyze_data.R
 
 #import packages
+library(devtools)
 library(tidyverse)
 library(ggmap)
 library(ggplot2)

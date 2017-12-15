@@ -10,7 +10,7 @@
 
 #The data is taken from the city of Vancouver Website:
 #http://data.vancouver.ca/datacatalogue/index.htm
-
+library(devtools)
 library(tidyverse)
 library(ggmap)
 library(ggplot2)
