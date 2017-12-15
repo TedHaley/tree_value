@@ -1,4 +1,4 @@
-#Land Value and Public Trees
+# Land Value and Public Trees
 
 #### Created by: Teddy Haley
 
@@ -6,13 +6,10 @@
 [Link to Milestone 3](https://github.com/TedHaley/tree_value/releases)  
 [Link to Milestone 1 and 2](https://github.ubc.ca/teddyh/tree_value/releases)
 
-##About
+## About
 This project analyzes the correlation between land value in the City of Vancouver and public trees. 
 
-##Usage
-To run the project:
-
-##Usage
+## Usage
 To run the project:
 
 1. `git clone https://github.com/TedHaley/tree_value.git`
@@ -23,11 +20,11 @@ To run the project:
 6. `make clean`
 7. `make all`
 
-##File Structure
+## File Structure
 
 ![](Makefile.png) 
 
-##Data
+## Data
 The datasets used in this analysis are provided by the City of Vancouver Open data set. These datasets can be found at [Vanocuver Open Data](#http://data.vancouver.ca/datacatalogue/index.htm).
 
 The datasets taken from the City of Vancouver website include:  
@@ -36,13 +33,13 @@ The datasets taken from the City of Vancouver website include:
 `local_area_boundary_shp`
 
 
-##Hypothesis
+## Hypothesis
 To test the correlation in size, age, and number of trees to the value of land in the City of Vancouver.
 
-##Analysis
+## Analysis
 Using the property tax report for land values provided by the City of Vancouver, as well as the dataset for street trees in Vancouver, this analysis will test the correlation between land value and various attributes of street trees. These attributes include the size, age, number, and location of the trees. 
 
-##Sub-Modules
+## Sub-Modules
 There are 4 modules in the root directory. They include bin, data, doc, results, and src.
 
 `data` contains all the raw data taken from the City of Vancouver website. This data includes spatial data for area boundaries, the public tree dataset, and the tax assessment dataset.
