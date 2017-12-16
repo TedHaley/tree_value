@@ -32,6 +32,8 @@ RUN Rscript -e "install.packages('gpclib')"
 
 RUN Rscript -e "install.packages('packrat')"
 
+FROM rocker/r-base:latest
+
 RUN xvfb-run -a install.r \ 
                 ggmap \
      		maptools \
