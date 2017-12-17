@@ -6,7 +6,6 @@
 # The results from the analysis will be displayed using various graphs, plots, and maps.
 
 # Usage: Rscript src/viz_data.R
-library(devtools)
 library(tidyverse)
 library(ggmap)
 library(ggplot2)
@@ -17,9 +16,6 @@ library(gpclib)
 library(lubridate)
 library(dplyr)
 library(readr)
-
-require(ggmap)
-require(gpclib)
 
 require(c("gpclib", "maptools"))
 if (!require(gpclib)) install.packages("gpclib", type="source")

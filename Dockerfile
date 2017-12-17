@@ -11,13 +11,8 @@
 # `make clean`
 # `make all`
 
-#REQUIREMENTS:
-#1.install_packages.R
-#2.R_packages.txt
 
-# THE FOLLOWING WAS ADAPTED FROM: https://github.com/achubaty
-
-FROM rocker/rstudio:latest
+FROM rocker/tidyverse
 
 RUN Rscript -e "install.packages('devtools')"
 
@@ -52,11 +47,4 @@ RUN Rscript -e "install.packages('hexbin')"
 RUN Rscript -e "install.packages('reshape2')"
 
 RUN Rscript -e "install.packages('ggmap', repos = 'http://cran.us.r-project.org')"
-
-# Install R packages from install script 
-WORKDIR /tmp/
-ADD install_packages.R /tmp/
-ADD R_packages.txt /tmp/
-RUN R -e "source('install_packages.R')"
-RUN rm install_packages.R R_packages.txt
 

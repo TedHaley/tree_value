@@ -9,17 +9,8 @@
 # Usage: Rscript src/analyze_data.R
 
 #import packages
-library(devtools)
 library(tidyverse)
-library(ggmap)
-library(ggplot2)
-library(rgdal)
-library(broom)
-library(maptools)
-library(gpclib)
-library(lubridate)
-library(dplyr)
-library(readr)
+
 
 #Read the clean data
 tree_data <- read.csv(file="results/tree_data_final.csv", header=TRUE, sep=",")
