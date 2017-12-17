@@ -11,30 +11,48 @@
 # `make clean`
 # `make all`
 
-# Using tidyverse Rocker image as a base
-FROM rocker/tidyverse
+#REQUIREMENTS:
+#1.install_packages.R
+#2.R_packages.txt
 
-RUN Rscript -e "install.packages('devtools')"
+# THE FOLLOWING WAS ADAPTED FROM: https://github.com/achubaty
 
-RUN Rscript -e "install.packages('ezknitr')"
+FROM rocker/rstudio:latest
 
-RUN Rscript -e "install.packages('lubridate')"
+#fetch CRAN packages
+RUN gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E084DAB9 && \
+    gpg -a --export E084DAB9 | apt-key add -
 
-RUN Rscript -e "install.packages('dplyr')"
+#Fetch Java key
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 
-RUN Rscript -e "install.packages('readr')"
+# Adding Fiocruz repository
+RUN /bin/echo -e '\n## Fiocruz CRAN repository\ndeb http://cran.fiocruz.br/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list
 
-RUN Rscript -e "install.packages('ggplot2')"
+# Adding Webupd8 repository
+RUN /bin/echo -e 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main\ndeb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' >> /etc/apt/sources.list.d/webupd8team-java.list
 
-RUN Rscript -e "install.packages('broom')"
+# Accepting Java license
+RUN /bin/echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | /usr/bin/debconf-set-selections
 
-RUN Rscript -e "install.packages('gpclib')"
+RUN apt-get update && apt-get install -y \
+    r-base \
+    wget \
+    gdebi-core \
+    subversion \
+    libgdal-dev \
+    libproj-dev \
+    libcurl4-gnutls-dev \
+    oracle-java8-installer
 
-RUN Rscript -e "install.packages('packrat')"
+RUN R CMD javareconf
 
-FROM rocker/r-base:latest
+# Install R packages from install script 
+WORKDIR /tmp/
+ADD install_packages.R /tmp/
+ADD R_packages.txt /tmp/
+RUN R -e "source('install_packages.R')"
+RUN rm install_packages.R R_packages.txt
 
-RUN xvfb-run -a install.r \ 
-                ggmap \
-     		maptools \
-      		rgdal \
+# Configuring R to use installed Oracle Java
+RUN R CMD javareconf
