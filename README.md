@@ -7,18 +7,18 @@
 [Link to Milestone 1 and 2](https://github.ubc.ca/teddyh/tree_value/releases)
 
 ## About
-This project analyzes the correlation between land value in the City of Vancouver and public trees. 
+The purpose of this project is to test the correlation between land value in the City of Vancouver and public trees to see if various attributes of street trees effect the land value of adjacent properties.
 
 ## Usage
 To run the project:
 
-1. `git clone https://github.com/TedHaley/tree_value.git`
-2. `cd Path-To-Local-Repo/tree_value`
-3. `docker pull teddyhaley/tree_value`
-4. `docker run --rm -it -v /Path-To-Local-Repo/tree_value:/home/tree_value teddyhaley/tree_value /bin/bash`
-5. `cd home/tree_value/`
-6. `make clean`
-7. `make all`
+1. Clone the github repository to a location on your local machine: `git clone https://github.com/TedHaley/tree_value.git`
+2. Change directory to the root of the downloaded repository: `cd Path-To-Local-Repo/tree_value`
+3. Pull the docker image from dockerhub: `docker pull teddyhaley/tree_value`
+4. Apply the docker image to the repository: `docker run --rm -it -v /Path-To-Local-Repo/tree_value:/home/tree_value teddyhaley/tree_value /bin/bash`
+5. Within the docker console, go to the home directory: `cd home/tree_value/`
+6. Clean the repository of all premade files: `make clean`
+7. Remake all the files and report: `make all`
 
 ## File Structure
 
