@@ -12,7 +12,9 @@
 # `make all`
 
 
-FROM rocker/tidyverse
+FROM rocker/r-base
+
+RUN Rscript -e "install.packages('tidyverse')"
 
 RUN Rscript -e "install.packages('devtools')"
 
